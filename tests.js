@@ -23,6 +23,16 @@ QUnit.test( "Task 2", function( assert ) {
     var f2 = rebind(f1, {x:3});
     assert.equal(f1(1, 1), 4);
     assert.equal(f2(1, 1), 5);
+
+    function b(a,b,c) {
+        return this.c + a + b + c;
+    }
+    var b1 = rebind(b, {c: 5}, 1);
+    var b2 = rebind(b1, {c: 16}, 1);
+    var b3 = rebind(b2, {c: 17}, 1);
+    assert.equal(b1(1,1), 8);
+    assert.equal(b2(1), 19);
+    assert.equal(b3(), 20);
 });
 
 QUnit.test( "Task 3", function( assert ) {

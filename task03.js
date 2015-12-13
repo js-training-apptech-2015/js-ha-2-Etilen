@@ -11,11 +11,13 @@ function rebind(fn, ctx) {
         var func = fn;
     } else {
         var func = fn.originalFunction;
+        outerArguments = fn.originalArguments.concat(outerArguments);
     }
     var bindedFunction = function () {
         return func.apply(ctx, outerArguments.concat(Array.prototype.slice.call(arguments)));
     }
-    bindedFunction.originalFunction = fn;
+    bindedFunction.originalFunction = func;
+    bindedFunction.originalArguments = outerArguments;
     return bindedFunction;
 }
 
